@@ -30,14 +30,9 @@
 	var link1 = plink.connect('ws://' + location.hostname + ':20500/');
 	var link2 = plink.connect('ws://' + location.hostname + ':20400/');
 
-	link1.on('open', function(){
-		link1.setPasscode('bob@link1');
-	});
-
-	link2.on('open', function(){
-		link2.setPasscode('bob@link2');
-	});
-
+	link1.setKey('bob@link1');
+	link2.setKey('bob@link2');
+	
 	link1.on('connection', peerHandler);
 	link2.on('connection', peerHandler);
 </script>

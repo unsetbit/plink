@@ -24,7 +24,5 @@
 		console.log('unable to connect to bob :(');
 	}
 	
-	link.on('open', function(){
-		link.usePasscode('bob@link1').then(connectionHandler, errorHandler);
-	});
+	link.useKey('bob@link1').then(connectionHandler, errorHandler);
 </script>
