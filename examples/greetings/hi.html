@@ -1,0 +1,12 @@
+<!doctype html><title>Hi!</title>
+<script src="/plink.js"></script>
+<script>
+	Plink.create()
+		.connect('ws://' + location.hostname + ':20500/')
+		.useKey('something secret')
+		.then(function(peer){
+			peer.on('open', function(){
+				peer.send('Hi!');
+			});
+		});
+</script>
