@@ -5,7 +5,9 @@
 		.connect('ws://' + location.hostname + ':20500/')
 		.on('connection', function(peer){
 			peer.on('message', function(message){
+				console.log('Received', message);
 				setTimeout(function(){
+					console.log('Sending', 'pong!');
 					peer.send('pong!');
 				}, 1000);
 			});			

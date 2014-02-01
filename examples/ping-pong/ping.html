@@ -6,11 +6,14 @@
 		.useKey('something secret')
 		.then(function(peer){
 			peer.on('open', function(){
+				console.log('Sending', 'ping?');
 				peer.send('ping?');
 			});
 
 			peer.on('message', function(message){
+				console.log('Received', message);
 				setTimeout(function(){
+					console.log('Sending', 'ping?');
 					peer.send('ping?');
 				}, 1000);
 			});
