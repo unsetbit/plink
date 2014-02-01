@@ -49,7 +49,7 @@ plink-server. The plink-server is only used to help the two peers
 connect to each other using a shared passcode. 
 
 ## API
-* For WebRTCNode API documentation, see [P](https://github.com/oztu/p).
+* For WebRtcNode API documentation, see [P](https://github.com/oztu/p).
 * For Promise API documentation, see [when.js](https://github.com/cujojs/when).
 
 ```javascript
@@ -73,9 +73,9 @@ var promise = plinkServer.setKey(mySecretKeyString, 60 * 1000);
 var promise = plinkServer.revokeKey(mySecretKeyString);
 
 // Use a key to connect to a peer.
-// Returns a promise for a WebRTCNode, please see the P documentation for
-// the API of the WebRTCNode.
-var promise = plinkServer.useKey(theirSecretKeyString);
+// Returns a promise for a WebRtcNode, please see the P documentation for
+// the API of the WebRtcNode.
+var webRtcNodePromise = plinkServer.useKey(theirSecretKeyString);
 
 // Events
 plinkServer.on('connection', webRTCNodeHandler);
