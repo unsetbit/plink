@@ -1,0 +1,23 @@
+<!doctype html><title>Ping (Plink)</title>
+<script src="/plink.js"></script>
+<script>
+	var link = Plink.create().connect('ws://' + location.hostname + ':20500/');
+
+	link.on('open', function(){
+		link.setToken('ozan', 1000 * 60);
+	});
+
+	link.on('connection', function(peer){
+		console.log(peer.address, ' connecting');
+		
+		// Whenever we receive a message, output it and respond
+		// with a 'pong!' after waiting for one second.
+		peer.on('message', function(message){
+			console.log(peer.address, ' --> ', message);
+			setTimeout(function(){
+				console.log(peer.address, ' <-- ', 'pong!');
+				peer.send('pong!');
+			}, 1000);
+		});
+	});
+</script>

@@ -1,0 +1,43 @@
+<!doctype html><title>Bob</title>
+<script src="/plink.js"></script>
+<script>
+	var connections = [];
+
+	function peerHandler(peer){
+		console.log('connected to ' + peer.address);
+		
+		connections.push(peer);
+		
+		peer.on('message', function(message){
+			console.log(peer.address, ' --> ', message);
+		});
+
+		peer.on('open', function(){
+			connections.forEach(function(other){
+				if(other === peer) return;
+				
+				if(other.isOpen()){
+					console.log(peer.address, ' <-- ' + other.address + 'is also here.');
+					peer.send(other.address);
+					console.log(other.address, ' <-- ' + peer.address + 'is also here.');
+					other.send(peer.address);
+				}
+			});
+		});
+	};
+
+	var plink = new Plink();
+	var link1 = plink.connect('ws://' + location.hostname + ':20500/');
+	var link2 = plink.connect('ws://' + location.hostname + ':20400/');
+
+	link1.on('open', function(){
+		link1.setPasscode('bob@link1');
+	});
+
+	link2.on('open', function(){
+		link2.setPasscode('bob@link2');
+	});
+
+	link1.on('connection', peerHandler);
+	link2.on('connection', peerHandler);
+</script>

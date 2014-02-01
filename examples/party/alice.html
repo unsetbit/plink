@@ -1,0 +1,30 @@
+<!doctype html><title>Alice</title>
+<script src="/plink.js"></script>
+<script>
+	var link = Plink.create().connect('ws://' + location.hostname + ':20500/');
+
+	function connectionHandler(bob){
+		console.log(bob.address, 'connected as Bob');
+		
+		bob.on('message', function(peerAddress){
+			var charlie = bob.connect(peerAddress);
+			// When successfully connected to a peer through Bob, introduce self
+			charlie.on('open', function(){
+				console.log(charlie.address, ' <-- Hi, I\'m Alice!');
+				charlie.send('Hi, I\'m Alice!');
+			});
+
+			charlie.on('message', function(message){
+				console.log(charlie.address, ' --> ', message);
+			});
+		});
+	}
+
+	function errorHandler(){
+		console.log('unable to connect to bob :(');
+	}
+	
+	link.on('open', function(){
+		link.usePasscode('bob@link1').then(connectionHandler, errorHandler);
+	});
+</script>
