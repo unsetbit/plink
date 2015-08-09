@@ -1,12 +1,12 @@
 # Plink makes networking browsers easy
 
-Plink is small tool (a thin layer on top of [P](https://github.com/oztu/p))
+Plink is small tool (a thin layer on top of [P](https://github.com/unsetbit/p))
 for creating data channels between two browsers.
 
 ## Example
 Here's an example of two applications which will establish
 a peer-to-peer connection with each other using a 
-[plink-server](http://github.com/oztu/plink-server) and
+[plink-server](http://github.com/unsetbit/plink-server) and
 then send greetings to each other via a peer-to-peer data channel.
 
 hello.html
@@ -49,7 +49,7 @@ plink-server. The plink-server is only used to help the two peers
 connect to each other using a shared passcode. 
 
 ## API
-* For WebRtcNode API documentation, see [P](https://github.com/oztu/p).
+* For WebRtcNode API documentation, see [P](https://github.com/unsetbit/p).
 * For Promise API documentation, see [when.js](https://github.com/cujojs/when).
 
 ```javascript
